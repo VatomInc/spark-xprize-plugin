@@ -69,7 +69,7 @@ const descriptor: any = {
 
 // This is the client id and secret for the plugin - used to communicate back to the Spark Engine. These are issued per plugin
 const clientId = "xprize-plugin";
-const clientSecret = "9KpHpibarDQRG99z72D3_";
+const clientSecret = "uDxwfnKpfgecJlVt5I8MV";
 
 const spark = new Spark(descriptor, clientId, clientSecret);
 
