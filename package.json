@@ -1,0 +1,24 @@
+{
+    "name": "@vatom/spark-xprize-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "types": "./dist/index.js",
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md",
+        "public"
+    ],
+    "main": "./dist/index",
+    "author": "Alistair Farquharson",
+    "dependencies": {
+        "@vatom/spark-sdk": "^1.0.13"
+    },
+    "scripts": {
+        "build": "rm -rf ./build && tsc",
+        "start": "node ./dist/index.js"
+    },
+    "devDependencies": {
+        "typescript": "^4.6.3"
+    }
+}

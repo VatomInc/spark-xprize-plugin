@@ -1,0 +1,41 @@
+deployments:
+  spark-xprize-plugin:
+    replicaCount: 1
+    podAnnotations:
+      vatom/commit-sha: "{{ tpl .Values.commitSha . }}"
+    containers:
+      spark-xprize-plugin:
+        image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:test
+        imagePullPolicy: Always
+        command:
+          - yarn
+          - -s
+          - start
+        containerPorts:
+          - containerPort: 3000
+            protocol: TCP
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+          requests:
+            memory: 256Mi
+            cpu: 250m
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+    terminationGracePeriodSeconds: 30
+
+services:
+  spark-xprize-plugin:
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/internal-load-balancer-subnet: vatom-vpc-u-host-001-sub-region-ilb-001
+      networking.gke.io/load-balancer-type: "Internal"
+    ports:
+      - protocol: TCP
+        port: 3000
+        targetPort: 3000
+    externalTrafficPolicy: Cluster
