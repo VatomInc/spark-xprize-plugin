@@ -13,6 +13,11 @@ const descriptor: any = {
         name: "Post",
       },
       {
+        id: "v.room.topic",
+        actions: ["reply", "react", "flag"],
+        name: "Topic",
+      },
+      {
         id: "v.room.poll",
         actions: ["reply", "react", "flag"],
         name: "Vote",
