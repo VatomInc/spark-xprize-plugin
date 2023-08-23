@@ -239,17 +239,6 @@ spark.on("message.new", async (data: any) => {
             type: "text",
             placeholder: "Some thoughtful commentary...",
           },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "stake-slider",
-                placeholder:
-                  "Feel strongly about your opinion? Let others know by staking your reputation. Learn more",
-                value: "number",
-              },
-            ],
-          },
         ],
       };
     }
@@ -268,13 +257,7 @@ spark.on("message.display", async (data: any) => {
           {
             type: "header",
             variation: "classic",
-            decorations: [
-              //added decorations for header as we use the same header for all messages. If a header does not have decorations we can set it to []
-              {
-                type: "reputation-counter",
-                values: "{{v.room.user.reputation}}", //{{eventType-content.body}}
-              },
-            ],
+            decorations: [],
           },
           {
             type: "content",
@@ -301,11 +284,6 @@ spark.on("message.display", async (data: any) => {
                 elements: [
                   {
                     type: "replies",
-                    style: "classic",
-                  },
-                  {
-                    type: "reputation-counter", // ??
-                    value: `{{v.room.message.reputation}}`, // The score should be stored in the message??
                     style: "classic",
                   },
                 ],
@@ -517,13 +495,7 @@ spark.on("message.display", async (data: any) => {
           {
             type: "header",
             variation: "classic",
-            decorations: [
-              //added decorations for header as we use the same header for all messages. If a header does not have decorations we can set it to []
-              {
-                type: "reputation-counter",
-                values: "{{v.room.user.reputation}}",
-              },
-            ],
+            decorations: [],
           },
           {
             type: "content",
@@ -546,12 +518,6 @@ spark.on("message.display", async (data: any) => {
                   {
                     type: "reactions",
                     style: "classic",
-                  },
-                  {
-                    type: "reputation-counter", // ??
-                    value: `{{v.room.reply.stake}}`, // The score should be stored in the message??
-                    style: "classic",
-                    align: "indent",
                   },
                 ],
               },
@@ -587,22 +553,4 @@ spark.on("v.room.reply", async (message: any) => {
 
   // console.info("Found member event", memberEvent);
 
-  // This updates the message repuation score
-  await spark.sendRoomEvent(room_id, "v.room.message.reputation", {
-    "m.relates_to": {
-      rel_type: "v.reputation",
-      event_id: parentMessageId,
-    },
-    body: content.stake, // Hardcoded for now
-  });
-  console.info("Updated message.reputation");
-
-  await spark.sendRoomEvent(room_id, "v.room.user.reputation", {
-    "m.relates_to": {
-      rel_type: "v.reputation",
-      event_id: content.parentMemberEventId,
-    },
-    body: content.stake, // Hardcoded for now
-  });
-  console.info("Updated user.reputation");
 });
