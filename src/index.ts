@@ -9,7 +9,7 @@ const descriptor: any = {
     message: [
       {
         id: "m.room.message",
-        actions: ["reply", "upgrade-to-topic", "react", "flag"],
+        actions: ["reply", "react", "flag"],
         name: "Post",
       },
       {
@@ -34,10 +34,6 @@ const descriptor: any = {
   },
   room_filters: [
     {
-      name: "Topics",
-      message_type: "v.room.topic",
-    },
-    {
       name: "Votes",
       message_type: "v.room.poll",
     },
@@ -50,10 +46,6 @@ const descriptor: any = {
     {
       name: "Posts",
       message_type: "m.room.message",
-    },
-    {
-      name: "Topics",
-      message_type: "v.room.topic",
     },
     {
       name: "Votes",
@@ -128,22 +120,6 @@ spark.on("message.new", async (data: any) => {
                 placeholder: "Attach Documents",
               },
             ],
-          },
-        ],
-      };
-    }
-
-    if (messageType === "v.room.topic") {
-      return {
-        type: messageType,
-        inputs: [
-          {
-            type: "title",
-            placeholder: "Topic Title",
-          },
-          {
-            type: "text",
-            placeholder: "Message...",
           },
         ],
       };
@@ -389,54 +365,6 @@ spark.on("message.display", async (data: any) => {
       };
     }
 
-    if (messageType === "v.room.topic") {
-      return {
-        type: messageType,
-        elements: [
-          {
-            type: "header",
-            variation: "detailed",
-          },
-          {
-            type: "badge",
-            align: "indent",
-          },
-          {
-            type: "content",
-            elements: [
-              {
-                type: "title",
-                content: "{{message.title}}",
-                style: "title",
-              },
-              {
-                type: "text",
-                content: "{{message.body}}",
-                style: "paragraph",
-              },
-            ],
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "row",
-                elements: [
-                  {
-                    type: "votes",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      };
-    }
 
     if (messageType === "v.room.score") {
       return {
