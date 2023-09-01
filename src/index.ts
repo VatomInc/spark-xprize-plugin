@@ -207,6 +207,32 @@ spark.on("message.new", async (data: any) => {
       };
     }
 
+    if (messageType === "v.room.sketch") {
+      return {
+        type: messageType,
+        inputs: [
+          {
+            type: "title",
+            placeholder: "Ask a Question",
+          },
+          {
+            type: "text",
+            placeholder: "Add some details...",
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "questions",
+                placeholder: "Questions",
+                value: "number",
+              },
+            ],
+          },
+        ],
+      };
+    }
+
     if (messageType === "v.room.reply") {
       return {
         type: messageType,
@@ -365,7 +391,6 @@ spark.on("message.display", async (data: any) => {
       };
     }
 
-
     if (messageType === "v.room.score") {
       return {
         type: messageType,
@@ -399,6 +424,54 @@ spark.on("message.display", async (data: any) => {
               {
                 type: "row",
                 align: "indent",
+                elements: [
+                  {
+                    type: "reactions",
+                    style: "classic",
+                  },
+                  {
+                    type: "replies",
+                    style: "classic",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+    }
+
+    if (messageType === "v.room.sketch") {
+      return {
+        type: messageType,
+        elements: [
+          {
+            type: "header",
+            variation: "classic",
+          },
+          {
+            type: "content",
+            elements: [
+              {
+                type: "title",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "text",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "questions",
+              },
+            ],
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "row",
                 elements: [
                   {
                     type: "reactions",
@@ -480,5 +553,4 @@ spark.on("v.room.reply", async (message: any) => {
   // const memberEvent = events?.chunk[0];
 
   // console.info("Found member event", memberEvent);
-
 });
