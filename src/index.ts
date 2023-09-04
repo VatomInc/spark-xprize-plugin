@@ -22,6 +22,11 @@ const descriptor: any = {
         actions: ["reply", "react", "flag"],
         name: "Score",
       },
+      {
+        id: "v.room.sketch",
+        actions: ["reply", "react", "flag"],
+        name: "Sketch",
+      },
     ],
     modal: [
       {
@@ -41,6 +46,10 @@ const descriptor: any = {
       name: "Scores",
       message_type: "v.room.score",
     },
+    {
+      name: "Sketches",
+      message_type: "v.room.sketch",
+    },
   ],
   member_filters: [
     {
@@ -54,6 +63,10 @@ const descriptor: any = {
     {
       name: "Polls",
       message_type: "v.room.score",
+    },
+    {
+      name: "Sketches",
+      message_type: "v.room.sketch",
     },
   ],
   controls: [],
