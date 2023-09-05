@@ -226,7 +226,7 @@ spark.on("message.new", async (data: any) => {
         inputs: [
           {
             type: "title",
-            placeholder: "Ask a Question",
+            placeholder: "Add a title",
           },
           {
             type: "text",
