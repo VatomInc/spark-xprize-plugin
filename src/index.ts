@@ -464,6 +464,7 @@ spark.on("message.display", async (data: any) => {
           },
           {
             type: "content",
+            align: "indent",
             elements: [
               {
                 type: "title",
@@ -485,6 +486,7 @@ spark.on("message.display", async (data: any) => {
             elements: [
               {
                 type: "row",
+                align: "indent",
                 elements: [
                   {
                     type: "reactions",
