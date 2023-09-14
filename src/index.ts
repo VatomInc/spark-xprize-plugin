@@ -283,6 +283,10 @@ spark.on("message.display", async (data: any) => {
                 content: "{{message.body}}",
                 style: "paragraph",
               },
+              {
+                type: "media",
+                content: "{{message.media}}",
+              },
             ],
           },
           {
@@ -334,6 +338,10 @@ spark.on("message.display", async (data: any) => {
                 content: "{{message.body}}",
                 style: "paragraph",
               },
+              {
+                type: "media",
+                content: "{{message.media}}",
+              },
             ],
           },
           {
@@ -381,6 +389,10 @@ spark.on("message.display", async (data: any) => {
                 style: "paragraph",
               },
               {
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
                 type: "choices",
               },
             ],
@@ -425,6 +437,10 @@ spark.on("message.display", async (data: any) => {
                 type: "text",
                 content: "{{message.body}}",
                 style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
               },
               {
                 type: "score",
@@ -477,6 +493,10 @@ spark.on("message.display", async (data: any) => {
                 style: "paragraph",
               },
               {
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
                 type: "questions",
               },
             ],
@@ -521,6 +541,10 @@ spark.on("message.display", async (data: any) => {
                 type: "text",
                 content: "{{message.body}}",
                 style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
               },
             ],
           },
