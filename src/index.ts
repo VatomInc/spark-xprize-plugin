@@ -15,7 +15,7 @@ const descriptor: any = {
       {
         id: "v.room.poll",
         actions: ["reply", "react", "flag"],
-        name: "Vote",
+        name: "Poll",
       },
       {
         id: "v.room.score",
@@ -39,7 +39,7 @@ const descriptor: any = {
   },
   room_filters: [
     {
-      name: "Votes",
+      name: "Polls",
       message_type: "v.room.poll",
     },
     {
@@ -57,11 +57,11 @@ const descriptor: any = {
       message_type: "m.room.message",
     },
     {
-      name: "Votes",
+      name: "Polls",
       message_type: "v.room.poll",
     },
     {
-      name: "Polls",
+      name: "Scores",
       message_type: "v.room.score",
     },
     {
