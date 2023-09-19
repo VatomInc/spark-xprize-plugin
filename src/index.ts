@@ -155,7 +155,7 @@ spark.on("message.new", async (data: any) => {
             elements: [
               {
                 type: "poll-length",
-                placeholder: "Vote Length",
+                placeholder: "Poll Length",
                 value: "number",
               },
               {
