@@ -27,6 +27,11 @@ const descriptor: any = {
         actions: ["reply", "react", "flag"],
         name: "Sketch",
       },
+      {
+        id: "v.room.vote",
+        actions: ["reply", "react", "flag"],
+        name: "Vote",
+      },
     ],
     modal: [
       {
