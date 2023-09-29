@@ -240,6 +240,16 @@ spark.on("message.new", async (data: any) => {
                 placeholder: "Questions",
                 value: "number",
               },
+              {
+                type: "start-time",
+                placeholder: "Scoring Starts",
+                value: "number",
+              },
+              {
+                type: "end-time",
+                placeholder: "Scoring Ends",
+                value: "number",
+              },
             ],
           },
         ],
