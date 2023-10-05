@@ -27,6 +27,11 @@ const descriptor: any = {
         actions: ["reply", "react", "flag"],
         name: "Sketch",
       },
+      {
+        id: "v.room.vote",
+        actions: ["reply", "react", "flag"],
+        name: "Vote",
+      },
     ],
     modal: [
       {
@@ -238,6 +243,42 @@ spark.on("message.new", async (data: any) => {
               {
                 type: "questions",
                 placeholder: "Questions",
+                value: "number",
+              },
+              {
+                type: "start-time",
+                placeholder: "Scoring Starts",
+                value: "number",
+              },
+              {
+                type: "end-time",
+                placeholder: "Scoring Ends",
+                value: "number",
+              },
+            ],
+          },
+        ],
+      };
+    }
+
+    if (messageType === "v.room.vote") {
+      return {
+        type: messageType,
+        inputs: [
+          {
+            type: "title",
+            placeholder: "Add a title",
+          },
+          {
+            type: "text",
+            placeholder: "Add some details...",
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "sketches",
+                placeholder: "Sketches",
                 value: "number",
               },
               {
@@ -508,6 +549,60 @@ spark.on("message.display", async (data: any) => {
               },
               {
                 type: "questions",
+              },
+            ],
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "row",
+                align: "indent",
+                elements: [
+                  {
+                    type: "reactions",
+                    style: "classic",
+                  },
+                  {
+                    type: "replies",
+                    style: "classic",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+    }
+
+    if (messageType === "v.room.vote") {
+      return {
+        type: messageType,
+        elements: [
+          {
+            type: "header",
+            variation: "classic",
+          },
+          {
+            type: "content",
+            align: "indent",
+            elements: [
+              {
+                type: "title",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "text",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
+                type: "sketches",
               },
             ],
           },
