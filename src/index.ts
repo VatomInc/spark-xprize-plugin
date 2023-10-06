@@ -291,12 +291,12 @@ spark.on("message.new", async (data: any) => {
               },
               {
                 type: "start-time",
-                placeholder: "Scoring Starts",
+                placeholder: "Vote Starts",
                 value: "number",
               },
               {
                 type: "end-time",
-                placeholder: "Scoring Ends",
+                placeholder: "Vote Ends",
                 value: "number",
               },
             ],
