@@ -55,6 +55,10 @@ const descriptor: any = {
       name: "Sketches",
       message_type: "v.room.sketch",
     },
+    {
+      name: "Votes",
+      message_type: "v.room.vote",
+    },
   ],
   member_filters: [
     {
@@ -72,6 +76,10 @@ const descriptor: any = {
     {
       name: "Sketches",
       message_type: "v.room.sketch",
+    },
+    {
+      name: "Votes",
+      message_type: "v.room.vote",
     },
   ],
   controls: [],
