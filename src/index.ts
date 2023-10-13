@@ -17,11 +17,11 @@ const descriptor: any = {
         actions: ["reply", "react", "flag"],
         name: "Poll",
       },
-      {
-        id: "v.room.score",
-        actions: ["reply", "react", "flag"],
-        name: "Score",
-      },
+      // {
+      //   id: "v.room.score",
+      //   actions: ["reply", "react", "flag"],
+      //   name: "Score",
+      // },
       {
         id: "v.room.sketch",
         actions: ["reply", "react", "flag"],
@@ -44,14 +44,6 @@ const descriptor: any = {
   },
   room_filters: [
     {
-      name: "Polls",
-      message_type: "v.room.poll",
-    },
-    {
-      name: "Scores",
-      message_type: "v.room.score",
-    },
-    {
       name: "Sketches",
       message_type: "v.room.sketch",
     },
@@ -59,20 +51,20 @@ const descriptor: any = {
       name: "Votes",
       message_type: "v.room.vote",
     },
-  ],
-  member_filters: [
+    {
+      name: "Polls",
+      message_type: "v.room.poll",
+    },
     {
       name: "Posts",
       message_type: "m.room.message",
     },
-    {
-      name: "Polls",
-      message_type: "v.room.poll",
-    },
-    {
-      name: "Scores",
-      message_type: "v.room.score",
-    },
+    // {
+    //   name: "Sketches",
+    //   message_type: "v.room.sketch",
+    // },
+  ],
+  member_filters: [
     {
       name: "Sketches",
       message_type: "v.room.sketch",
@@ -81,6 +73,18 @@ const descriptor: any = {
       name: "Votes",
       message_type: "v.room.vote",
     },
+    {
+      name: "Polls",
+      message_type: "v.room.poll",
+    },
+    {
+      name: "Posts",
+      message_type: "m.room.message",
+    },
+    // {
+    //   name: "Sketches",
+    //   message_type: "v.room.sketch",
+    // },
   ],
   controls: [],
 };
