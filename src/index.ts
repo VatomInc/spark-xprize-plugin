@@ -361,14 +361,9 @@ spark.on("message.display", async (data: any) => {
                 align: "indent",
               },
               {
-                type: "row",
+                type: "replies",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
               },
             ],
           },
