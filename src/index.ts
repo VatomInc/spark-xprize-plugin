@@ -514,18 +514,14 @@ spark.on("message.display", async (data: any) => {
             type: "decorations",
             elements: [
               {
-                type: "row",
+                type: "reactions",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "reactions",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
+              },
+              {
+                type: "replies",
+                style: "classic",
+                align: "indent",
               },
             ],
           },
@@ -568,18 +564,14 @@ spark.on("message.display", async (data: any) => {
             type: "decorations",
             elements: [
               {
-                type: "row",
+                type: "reactions",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "reactions",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
+              },
+              {
+                type: "replies",
+                style: "classic",
+                align: "indent",
               },
             ],
           },
@@ -622,18 +614,14 @@ spark.on("message.display", async (data: any) => {
             type: "decorations",
             elements: [
               {
-                type: "row",
+                type: "reactions",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "reactions",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
+              },
+              {
+                type: "replies",
+                style: "classic",
+                align: "indent",
               },
             ],
           },
