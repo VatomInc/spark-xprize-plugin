@@ -71,8 +71,8 @@ steps:
     - -c
     - |
       set -e
-      docker build -t ${_ARTIFACT_REGISTRY}/${_NAME}:${_DEPLOY_BRANCH} ${_DOCKER_CONTEXT} -f ${_DOCKER_FILE}
-      docker push ${_ARTIFACT_REGISTRY}/${_NAME}:${_DEPLOY_BRANCH}
+      docker build -t ${_ARTIFACT_REGISTRY}/${_NAME}:${COMMIT_SHA} ${_DOCKER_CONTEXT} -f ${_DOCKER_FILE}
+      docker push ${_ARTIFACT_REGISTRY}/${_NAME}:${COMMIT_SHA}
   waitFor: ['build']
 
 # helm deploy
