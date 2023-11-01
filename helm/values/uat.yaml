@@ -5,7 +5,7 @@ deployments:
       vatom/commit-sha: "{{ tpl .Values.commitSha . }}"
     containers:
       spark-xprize-plugin:
-        image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:test
+        image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:{{ tpl .Values.commitSha . }}
         imagePullPolicy: Always
         command:
           - yarn
