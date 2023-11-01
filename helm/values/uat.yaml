@@ -6,7 +6,7 @@ deployments:
     containers:
       spark-xprize-plugin:
         image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:{{ tpl .Values.commitSha . }}
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         command:
           - yarn
           - -s
