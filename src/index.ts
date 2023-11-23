@@ -155,38 +155,89 @@ spark.on("message.new", async (data: any) => {
       };
     }
 
-    if (messageType === "v.room.poll") {
-      return {
-        type: messageType,
-        inputs: [
-          {
-            type: "title",
-            placeholder: "Ask a Question",
-          },
-          {
-            type: "text",
-            placeholder: "Add some details...",
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "poll-length",
-                placeholder: "Poll Length",
-                value: "number",
-              },
-              {
-                type: "hide-results",
-                placeholder: "Hide results until end",
-                value: "boolean",
-              },
-            ],
-          },
-        ],
-      };
-    }
+    // if (messageType === "v.room.poll") {
+    //   return {
+    //     type: messageType,
+    //     inputs: [
+    //       {
+    //         type: "title",
+    //         placeholder: "Ask a Question",
+    //       },
+    //       {
+    //         type: "text",
+    //         placeholder: "Add some details...",
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "poll-length",
+    //             placeholder: "Poll Length",
+    //             value: "number",
+    //           },
+    //           {
+    //             type: "hide-results",
+    //             placeholder: "Hide results until end",
+    //             value: "boolean",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
 
-    if (messageType === "v.room.score") {
+    // if (messageType === "v.room.score") {
+    //   return {
+    //     type: messageType,
+    //     inputs: [
+    //       {
+    //         type: "title",
+    //         placeholder: "Ask a question",
+    //       },
+    //       {
+    //         type: "text",
+    //         placeholder: "Add some details...",
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "score-style",
+    //             placeholder: "Style",
+    //             data: {
+    //               styles: [
+    //                 "numbered-1-5",
+    //                 "numbered-0-5",
+    //                 "numbered-1-10",
+    //                 "numbered-0-10",
+    //                 "emojies",
+    //                 "stars",
+    //               ],
+    //             },
+    //             value: "string",
+    //           },
+    //           {
+    //             type: "response-anchors",
+    //             placeholder: "Response Anchors",
+    //             value: "string",
+    //           },
+    //           {
+    //             type: "poll-length",
+    //             placeholder: "Scoring Window",
+    //             value: "number",
+    //           },
+    //           {
+    //             type: "hide-results",
+    //             placeholder: "Hide results until end",
+    //             value: "boolean",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+
+    if (messageType === "v.room.poll") {
       return {
         type: messageType,
         inputs: [
@@ -206,6 +257,7 @@ spark.on("message.new", async (data: any) => {
                 placeholder: "Style",
                 data: {
                   styles: [
+                    "single-choice-poll",
                     "numbered-1-5",
                     "numbered-0-5",
                     "numbered-1-10",
@@ -214,11 +266,6 @@ spark.on("message.new", async (data: any) => {
                     "stars",
                   ],
                 },
-                value: "string",
-              },
-              {
-                type: "response-anchors",
-                placeholder: "Response Anchors",
                 value: "string",
               },
               {
@@ -424,6 +471,106 @@ spark.on("message.display", async (data: any) => {
       };
     }
 
+    // if (messageType === "v.room.poll") {
+    //   return {
+    //     type: messageType,
+    //     elements: [
+    //       {
+    //         type: "header",
+    //         variation: "classic",
+    //       },
+    //       {
+    //         type: "content",
+    //         align: "indent",
+    //         elements: [
+    //           {
+    //             type: "title",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "text",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "media",
+    //             content: "{{message.media}}",
+    //           },
+    //           {
+    //             type: "choices",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "reactions",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //           {
+    //             type: "replies",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+
+    // if (messageType === "v.room.score") {
+    //   return {
+    //     type: messageType,
+    //     elements: [
+    //       {
+    //         type: "header",
+    //         variation: "classic",
+    //       },
+    //       {
+    //         type: "content",
+    //         align: "indent",
+    //         elements: [
+    //           {
+    //             type: "title",
+    //             content: "{{message.title}}",
+    //             style: "title",
+    //           },
+    //           {
+    //             type: "text",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "media",
+    //             content: "{{message.media}}",
+    //           },
+    //           {
+    //             type: "score",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "reactions",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //           {
+    //             type: "replies",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+
     if (messageType === "v.room.poll") {
       return {
         type: messageType,
@@ -452,53 +599,6 @@ spark.on("message.display", async (data: any) => {
               },
               {
                 type: "choices",
-              },
-            ],
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "reactions",
-                style: "classic",
-                align: "indent",
-              },
-              {
-                type: "replies",
-                style: "classic",
-                align: "indent",
-              },
-            ],
-          },
-        ],
-      };
-    }
-
-    if (messageType === "v.room.score") {
-      return {
-        type: messageType,
-        elements: [
-          {
-            type: "header",
-            variation: "classic",
-          },
-          {
-            type: "content",
-            align: "indent",
-            elements: [
-              {
-                type: "title",
-                content: "{{message.title}}",
-                style: "title",
-              },
-              {
-                type: "text",
-                content: "{{message.body}}",
-                style: "paragraph",
-              },
-              {
-                type: "media",
-                content: "{{message.media}}",
               },
               {
                 type: "score",
