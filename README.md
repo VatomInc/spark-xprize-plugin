@@ -196,3 +196,4 @@ The Vote contains a title, text area and is comprised of several decorations, na
 
 ### System Events
 
+This plugin currently does not leverage any system events
