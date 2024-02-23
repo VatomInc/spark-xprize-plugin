@@ -44,20 +44,74 @@ For a full description of the Spark Plugin, please see https://github.com/VatomI
 
 #### Message Facades
 
-The XPrize plugin created 3 custom message facades:
+The XPrize plugin creates 3 custom message facades:
 
-* v.room.topic - A special 'Topic' for discussion
 * v.room.poll - A poll
-* v.room.score - A way to score proposals that were submitted
+* v.room.sketch - A way to present proposals that were submitted
+* v.room.vote - A way to vote on a subset of leading proposals
 
 #### Modal Facades
 
-The XPrize plugin created one custom modal facades:
+The XPrize plugin creates one custom modal facades:
 
 * message.new for v.room.topic
 
-
 ### Rendering Events
+
+The plugin renders the UI for each of custom message facades:
+
+#### v.room.poll
+
+The poll contains a title, text area and is comprised of several decorations, namely score-style, poll-length, and hide-results that are built-in decorations offered by the platform
+
+```js
+{
+type: messageType,
+inputs: [
+    {
+    type: "title",
+    placeholder: "Ask a question",
+    },
+    {
+    type: "text",
+    placeholder: "Add some details...",
+    },
+    {
+    type: "decorations",
+    elements: [
+        {
+        type: "score-style",
+        placeholder: "Style",
+        data: {
+            styles: [
+            "single-choice-poll",
+            "numbered-1-5",
+            "numbered-0-5",
+            "numbered-1-10",
+            "numbered-0-10",
+            "emojies",
+            "stars",
+            ],
+        },
+        value: "string",
+        },
+        {
+        type: "poll-length",
+        placeholder: "Scoring Window",
+        value: "number",
+        },
+        {
+        type: "hide-results",
+        placeholder: "Hide results until end",
+        value: "boolean",
+        },
+    ],
+    },
+],
+};
+
+```
+
 
 
 ### System Events
