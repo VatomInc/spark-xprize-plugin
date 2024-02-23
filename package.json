@@ -12,13 +12,22 @@
     "main": "./dist/index",
     "author": "Alistair Farquharson",
     "dependencies": {
-        "@vatom/spark-sdk": "^1.0.13"
+        "@vatom/spark-sdk": "^1.0.13",
+        "dotenv": "^16.0.3",
+        "module-alias": "^2.2.2"
     },
     "scripts": {
-        "build": "rm -rf ./build && tsc",
-        "start": "node ./dist/index.js"
+        "start": "node -r module-alias/register dist/index.js",
+		"start:watch": "nodemon -r module-alias/register dist/index.js",
+		"build": "npx tsc",
+		"build:watch": "npx tsc -w",
+		"typecheck": "tsc --noEmit",
+		"format": "prettier --write \"{src,scripts,migrations}/**/*.{js,ts}\"",
+		"lint": "eslint \"{src,scripts,migrations}/**/*.{js,jsx,ts,tsx}\"",
+		"tslint-check": "tslint-config-prettier-check ./tslint.json"
     },
     "devDependencies": {
+        "nodemon": "^2.0.2",
         "typescript": "^4.6.3"
     }
 }
