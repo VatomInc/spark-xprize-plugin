@@ -67,47 +67,48 @@ The poll contains a title, text area and is comprised of several decorations, na
 ```js
 {
 type: messageType,
-inputs: [
-    {
-    type: "title",
-    placeholder: "Ask a question",
-    },
-    {
-    type: "text",
-    placeholder: "Add some details...",
-    },
-    {
-    type: "decorations",
-    elements: [
+inputs: 
+    [
         {
-        type: "score-style",
-        placeholder: "Style",
-        data: {
-            styles: [
-            "single-choice-poll",
-            "numbered-1-5",
-            "numbered-0-5",
-            "numbered-1-10",
-            "numbered-0-10",
-            "emojies",
-            "stars",
+            type: "title",
+            placeholder: "Ask a question",
+        },
+        {
+            type: "text",
+            placeholder: "Add some details...",
+        },
+        {
+            type: "decorations",
+            elements: [
+                {
+                    type: "score-style",
+                    placeholder: "Style",
+                    data: {
+                        styles: [
+                        "single-choice-poll",
+                        "numbered-1-5",
+                        "numbered-0-5",
+                        "numbered-1-10",
+                        "numbered-0-10",
+                        "emojies",
+                        "stars",
+                        ],
+                    },
+                    value: "string",
+                },
+                {
+                    type: "poll-length",
+                    placeholder: "Scoring Window",
+                    value: "number",
+                },
+                {
+                    type: "hide-results",
+                    placeholder: "Hide results until end",
+                    value: "boolean",
+                },
             ],
         },
-        value: "string",
-        },
-        {
-        type: "poll-length",
-        placeholder: "Scoring Window",
-        value: "number",
-        },
-        {
-        type: "hide-results",
-        placeholder: "Hide results until end",
-        value: "boolean",
-        },
     ],
-    },
-],
 };
 
 ```
