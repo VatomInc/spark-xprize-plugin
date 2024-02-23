@@ -5,8 +5,8 @@ deployments:
       vatom/commit-sha: "{{ tpl .Values.commitSha . }}"
     containers:
       spark-xprize-plugin:
-        image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:test
-        imagePullPolicy: Always
+        image: us-docker.pkg.dev/u-repo-161-artifact/vatom-artifact-docker-us/spark-xprize-plugin:{{ tpl .Values.commitSha . }}
+        imagePullPolicy: IfNotPresent
         command:
           - yarn
           - -s
@@ -30,12 +30,25 @@ deployments:
 
 services:
   spark-xprize-plugin:
-    type: LoadBalancer
-    annotations:
-      networking.gke.io/internal-load-balancer-subnet: vatom-vpc-u-host-001-sub-region-ilb-001
-      networking.gke.io/load-balancer-type: "Internal"
+    type: ClusterIP
     ports:
       - protocol: TCP
         port: 3000
         targetPort: 3000
-    externalTrafficPolicy: Cluster
+
+ingresses:
+  spark-xprize-plugin:
+    annotations:
+      kubernetes.io/ingress.class: nginx-internal
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    rules:
+      - host: xprize-plugin.api.vatominc.cc
+        http:
+          paths:
+          - backend:
+              service:
+                name: spark-xprize-plugin
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix

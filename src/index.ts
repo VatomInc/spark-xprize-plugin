@@ -10,7 +10,7 @@ const descriptor: any = {
     message: [
       {
         id: "m.room.message",
-        actions: ["reply", "upgrade-to-topic", "react", "flag"],
+        actions: ["reply", "react", "flag"],
         name: "Post",
       },
       {
@@ -21,12 +21,22 @@ const descriptor: any = {
       {
         id: "v.room.poll",
         actions: ["reply", "react", "flag"],
-        name: "Vote",
+        name: "Poll",
+      },
+      // {
+      //   id: "v.room.score",
+      //   actions: ["reply", "react", "flag"],
+      //   name: "Score",
+      // },
+      {
+        id: "v.room.sketch",
+        actions: ["reply", "react", "flag"],
+        name: "Sketch",
       },
       {
-        id: "v.room.score",
+        id: "v.room.vote",
         actions: ["reply", "react", "flag"],
-        name: "Score",
+        name: "Vote",
       },
     ],
     modal: [
@@ -40,35 +50,47 @@ const descriptor: any = {
   },
   room_filters: [
     {
-      name: "Topics",
-      message_type: "v.room.topic",
+      name: "Sketches",
+      message_type: "v.room.sketch",
     },
     {
       name: "Votes",
-      message_type: "v.room.poll",
+      message_type: "v.room.vote",
     },
     {
-      name: "Scores",
-      message_type: "v.room.score",
+      name: "Polls",
+      message_type: "v.room.poll",
     },
-  ],
-  member_filters: [
     {
       name: "Posts",
       message_type: "m.room.message",
     },
+    // {
+    //   name: "Sketches",
+    //   message_type: "v.room.sketch",
+    // },
+  ],
+  member_filters: [
     {
-      name: "Topics",
-      message_type: "v.room.topic",
+      name: "Sketches",
+      message_type: "v.room.sketch",
     },
     {
       name: "Votes",
-      message_type: "v.room.poll",
+      message_type: "v.room.vote",
     },
     {
       name: "Polls",
-      message_type: "v.room.score",
+      message_type: "v.room.poll",
     },
+    {
+      name: "Posts",
+      message_type: "m.room.message",
+    },
+    // {
+    //   name: "Sketches",
+    //   message_type: "v.room.sketch",
+    // },
   ],
   controls: [],
 };
@@ -140,54 +162,89 @@ spark.on("message.new", async (data: any) => {
       };
     }
 
-    if (messageType === "v.room.topic") {
-      return {
-        type: messageType,
-        inputs: [
-          {
-            type: "title",
-            placeholder: "Topic Title",
-          },
-          {
-            type: "text",
-            placeholder: "Message...",
-          },
-        ],
-      };
-    }
+    // if (messageType === "v.room.poll") {
+    //   return {
+    //     type: messageType,
+    //     inputs: [
+    //       {
+    //         type: "title",
+    //         placeholder: "Ask a Question",
+    //       },
+    //       {
+    //         type: "text",
+    //         placeholder: "Add some details...",
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "poll-length",
+    //             placeholder: "Poll Length",
+    //             value: "number",
+    //           },
+    //           {
+    //             type: "hide-results",
+    //             placeholder: "Hide results until end",
+    //             value: "boolean",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+
+    // if (messageType === "v.room.score") {
+    //   return {
+    //     type: messageType,
+    //     inputs: [
+    //       {
+    //         type: "title",
+    //         placeholder: "Ask a question",
+    //       },
+    //       {
+    //         type: "text",
+    //         placeholder: "Add some details...",
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "score-style",
+    //             placeholder: "Style",
+    //             data: {
+    //               styles: [
+    //                 "numbered-1-5",
+    //                 "numbered-0-5",
+    //                 "numbered-1-10",
+    //                 "numbered-0-10",
+    //                 "emojies",
+    //                 "stars",
+    //               ],
+    //             },
+    //             value: "string",
+    //           },
+    //           {
+    //             type: "response-anchors",
+    //             placeholder: "Response Anchors",
+    //             value: "string",
+    //           },
+    //           {
+    //             type: "poll-length",
+    //             placeholder: "Scoring Window",
+    //             value: "number",
+    //           },
+    //           {
+    //             type: "hide-results",
+    //             placeholder: "Hide results until end",
+    //             value: "boolean",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
 
     if (messageType === "v.room.poll") {
-      return {
-        type: messageType,
-        inputs: [
-          {
-            type: "title",
-            placeholder: "Ask a Question",
-          },
-          {
-            type: "text",
-            placeholder: "Add some details...",
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "poll-length",
-                placeholder: "Vote Length",
-                value: "number",
-              },
-              {
-                type: "hide-results",
-                placeholder: "Hide results until end",
-                value: "boolean",
-              },
-            ],
-          },
-        ],
-      };
-    }
-
-    if (messageType === "v.room.score") {
       return {
         type: messageType,
         inputs: [
@@ -207,6 +264,7 @@ spark.on("message.new", async (data: any) => {
                 placeholder: "Style",
                 data: {
                   styles: [
+                    "single-choice-poll",
                     "numbered-1-5",
                     "numbered-0-5",
                     "numbered-1-10",
@@ -215,11 +273,6 @@ spark.on("message.new", async (data: any) => {
                     "stars",
                   ],
                 },
-                value: "string",
-              },
-              {
-                type: "response-anchors",
-                placeholder: "Response Anchors",
                 value: "string",
               },
               {
@@ -238,6 +291,78 @@ spark.on("message.new", async (data: any) => {
       };
     }
 
+    if (messageType === "v.room.sketch") {
+      return {
+        type: messageType,
+        inputs: [
+          {
+            type: "title",
+            placeholder: "Add a title",
+          },
+          {
+            type: "text",
+            placeholder: "Add some details...",
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "questions",
+                placeholder: "Questions",
+                value: "number",
+              },
+              {
+                type: "start-time",
+                placeholder: "Scoring Starts",
+                value: "number",
+              },
+              {
+                type: "end-time",
+                placeholder: "Scoring Ends",
+                value: "number",
+              },
+            ],
+          },
+        ],
+      };
+    }
+
+    if (messageType === "v.room.vote") {
+      return {
+        type: messageType,
+        inputs: [
+          {
+            type: "title",
+            placeholder: "Add a title",
+          },
+          {
+            type: "text",
+            placeholder: "Add some details...",
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "sketches",
+                placeholder: "Sketches",
+                value: "number",
+              },
+              {
+                type: "start-time",
+                placeholder: "Vote Starts",
+                value: "number",
+              },
+              {
+                type: "end-time",
+                placeholder: "Vote Ends",
+                value: "number",
+              },
+            ],
+          },
+        ],
+      };
+    }
+
     if (messageType === "v.room.reply") {
       return {
         type: messageType,
@@ -245,17 +370,6 @@ spark.on("message.new", async (data: any) => {
           {
             type: "text",
             placeholder: "Some thoughtful commentary...",
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "stake-slider",
-                placeholder:
-                  "Feel strongly about your opinion? Let others know by staking your reputation. Learn more",
-                value: "number",
-              },
-            ],
           },
         ],
       };
@@ -275,13 +389,7 @@ spark.on("message.display", async (data: any) => {
           {
             type: "header",
             variation: "classic",
-            decorations: [
-              //added decorations for header as we use the same header for all messages. If a header does not have decorations we can set it to []
-              {
-                type: "reputation-counter",
-                values: "{{v.room.user.reputation}}", //{{eventType-content.body}}
-              },
-            ],
+            decorations: [],
           },
           {
             type: "content",
@@ -291,6 +399,10 @@ spark.on("message.display", async (data: any) => {
                 type: "text",
                 content: "{{message.body}}",
                 style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
               },
             ],
           },
@@ -303,19 +415,9 @@ spark.on("message.display", async (data: any) => {
                 align: "indent",
               },
               {
-                type: "row",
+                type: "replies",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                  {
-                    type: "reputation-counter", // ??
-                    value: `{{v.room.message.reputation}}`, // The score should be stored in the message??
-                    style: "classic",
-                  },
-                ],
               },
             ],
           },
@@ -348,6 +450,10 @@ spark.on("message.display", async (data: any) => {
                 content: "{{message.body}}",
                 style: "paragraph",
               },
+              {
+                type: "media",
+                content: "{{message.media}}",
+              },
             ],
           },
           {
@@ -371,6 +477,106 @@ spark.on("message.display", async (data: any) => {
         ],
       };
     }
+
+    // if (messageType === "v.room.poll") {
+    //   return {
+    //     type: messageType,
+    //     elements: [
+    //       {
+    //         type: "header",
+    //         variation: "classic",
+    //       },
+    //       {
+    //         type: "content",
+    //         align: "indent",
+    //         elements: [
+    //           {
+    //             type: "title",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "text",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "media",
+    //             content: "{{message.media}}",
+    //           },
+    //           {
+    //             type: "choices",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "reactions",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //           {
+    //             type: "replies",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
+
+    // if (messageType === "v.room.score") {
+    //   return {
+    //     type: messageType,
+    //     elements: [
+    //       {
+    //         type: "header",
+    //         variation: "classic",
+    //       },
+    //       {
+    //         type: "content",
+    //         align: "indent",
+    //         elements: [
+    //           {
+    //             type: "title",
+    //             content: "{{message.title}}",
+    //             style: "title",
+    //           },
+    //           {
+    //             type: "text",
+    //             content: "{{message.body}}",
+    //             style: "paragraph",
+    //           },
+    //           {
+    //             type: "media",
+    //             content: "{{message.media}}",
+    //           },
+    //           {
+    //             type: "score",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         type: "decorations",
+    //         elements: [
+    //           {
+    //             type: "reactions",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //           {
+    //             type: "replies",
+    //             style: "classic",
+    //             align: "indent",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   };
+    // }
 
     if (messageType === "v.room.poll") {
       return {
@@ -395,7 +601,14 @@ spark.on("message.display", async (data: any) => {
                 style: "paragraph",
               },
               {
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
                 type: "choices",
+              },
+              {
+                type: "score",
               },
             ],
           },
@@ -418,56 +631,7 @@ spark.on("message.display", async (data: any) => {
       };
     }
 
-    if (messageType === "v.room.topic") {
-      return {
-        type: messageType,
-        elements: [
-          {
-            type: "header",
-            variation: "detailed",
-          },
-          {
-            type: "badge",
-            align: "indent",
-          },
-          {
-            type: "content",
-            elements: [
-              {
-                type: "title",
-                content: "{{message.title}}",
-                style: "title",
-              },
-              {
-                type: "text",
-                content: "{{message.body}}",
-                style: "paragraph",
-              },
-            ],
-          },
-          {
-            type: "decorations",
-            elements: [
-              {
-                type: "row",
-                elements: [
-                  {
-                    type: "votes",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      };
-    }
-
-    if (messageType === "v.room.score") {
+    if (messageType === "v.room.sketch") {
       return {
         type: messageType,
         elements: [
@@ -481,8 +645,8 @@ spark.on("message.display", async (data: any) => {
             elements: [
               {
                 type: "title",
-                content: "{{message.title}}",
-                style: "title",
+                content: "{{message.body}}",
+                style: "paragraph",
               },
               {
                 type: "text",
@@ -490,7 +654,11 @@ spark.on("message.display", async (data: any) => {
                 style: "paragraph",
               },
               {
-                type: "score",
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
+                type: "questions",
               },
             ],
           },
@@ -498,18 +666,64 @@ spark.on("message.display", async (data: any) => {
             type: "decorations",
             elements: [
               {
-                type: "row",
+                type: "reactions",
+                style: "classic",
                 align: "indent",
-                elements: [
-                  {
-                    type: "reactions",
-                    style: "classic",
-                  },
-                  {
-                    type: "replies",
-                    style: "classic",
-                  },
-                ],
+              },
+              {
+                type: "replies",
+                style: "classic",
+                align: "indent",
+              },
+            ],
+          },
+        ],
+      };
+    }
+
+    if (messageType === "v.room.vote") {
+      return {
+        type: messageType,
+        elements: [
+          {
+            type: "header",
+            variation: "classic",
+          },
+          {
+            type: "content",
+            align: "indent",
+            elements: [
+              {
+                type: "title",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "text",
+                content: "{{message.body}}",
+                style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
+              },
+              {
+                type: "sketches",
+              },
+            ],
+          },
+          {
+            type: "decorations",
+            elements: [
+              {
+                type: "reactions",
+                style: "classic",
+                align: "indent",
+              },
+              {
+                type: "replies",
+                style: "classic",
+                align: "indent",
               },
             ],
           },
@@ -524,13 +738,7 @@ spark.on("message.display", async (data: any) => {
           {
             type: "header",
             variation: "classic",
-            decorations: [
-              //added decorations for header as we use the same header for all messages. If a header does not have decorations we can set it to []
-              {
-                type: "reputation-counter",
-                values: "{{v.room.user.reputation}}",
-              },
-            ],
+            decorations: [],
           },
           {
             type: "content",
@@ -540,6 +748,10 @@ spark.on("message.display", async (data: any) => {
                 type: "text",
                 content: "{{message.body}}",
                 style: "paragraph",
+              },
+              {
+                type: "media",
+                content: "{{message.media}}",
               },
             ],
           },
@@ -553,12 +765,6 @@ spark.on("message.display", async (data: any) => {
                   {
                     type: "reactions",
                     style: "classic",
-                  },
-                  {
-                    type: "reputation-counter", // ??
-                    value: `{{v.room.reply.stake}}`, // The score should be stored in the message??
-                    style: "classic",
-                    align: "indent",
                   },
                 ],
               },
@@ -593,23 +799,4 @@ spark.on("v.room.reply", async (message: any) => {
   // const memberEvent = events?.chunk[0];
 
   // console.info("Found member event", memberEvent);
-
-  // This updates the message repuation score
-  await spark.sendRoomEvent(room_id, "v.room.message.reputation", {
-    "m.relates_to": {
-      rel_type: "v.reputation",
-      event_id: parentMessageId,
-    },
-    body: content.stake, // Hardcoded for now
-  });
-  console.info("Updated message.reputation");
-
-  await spark.sendRoomEvent(room_id, "v.room.user.reputation", {
-    "m.relates_to": {
-      rel_type: "v.reputation",
-      event_id: content.parentMemberEventId,
-    },
-    body: content.stake, // Hardcoded for now
-  });
-  console.info("Updated user.reputation");
 });
