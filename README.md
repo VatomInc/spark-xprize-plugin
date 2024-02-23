@@ -62,12 +62,12 @@ The plugin renders the UI for each of custom message facades:
 
 #### v.room.poll
 
-The poll contains a title, text area and is comprised of several decorations, namely score-style, poll-length, and hide-results that are built-in decorations offered by the platform
+The Poll contains a title, text area and is comprised of several decorations, namely score-style, poll-length, and hide-results that are built-in decorations offered by the platform
 
 ```js
 {
-type: messageType,
-inputs: 
+    type: messageType,
+    inputs: 
     [
         {
             type: "title",
@@ -113,7 +113,86 @@ inputs:
 
 ```
 
+#### v.room.sketch
 
+The Sketch contains a title, text area and is comprised of several decorations, namely questions, start-time, and end-time that are built-in decorations offered by the platform
+
+```js
+{
+    type: messageType,
+    inputs: [
+        {
+            type: "title",
+            placeholder: "Add a title",
+        },
+        {
+            type: "text",
+            placeholder: "Add some details...",
+        },
+        {
+            type: "decorations",
+            elements: [
+                {
+                    type: "questions",
+                    placeholder: "Questions",
+                    value: "number",
+                },
+                {
+                    type: "start-time",
+                    placeholder: "Scoring Starts",
+                    value: "number",
+                },
+                {
+                    type: "end-time",
+                    placeholder: "Scoring Ends",
+                    value: "number",
+                },
+            ],
+        },
+    ],
+}
+
+```
+
+#### v.room.vote
+
+The Vote contains a title, text area and is comprised of several decorations, namely sketches, start-time, and end-time that are built-in decorations offered by the platform
+
+```js
+{
+    type: messageType,
+    inputs: [
+        {
+            type: "title",
+            placeholder: "Add a title",
+        },
+        {
+            type: "text",
+            placeholder: "Add some details...",
+        },
+        {
+            type: "decorations",
+            elements: [
+                {
+                    type: "sketches",
+                    placeholder: "Sketches",
+                    value: "number",
+                },
+                {
+                    type: "start-time",
+                    placeholder: "Vote Starts",
+                    value: "number",
+                },
+                {
+                    type: "end-time",
+                    placeholder: "Vote Ends",
+                    value: "number",
+                },
+            ],
+        },
+    ],
+}
+```
 
 ### System Events
 
