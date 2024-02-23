@@ -13,7 +13,7 @@ Install dependencies:
 yarn
 ```
 
-Specify client id & secret in .env:
+Specify client id & secret in .env. These can be obtained from [Vatom Studio](https://studio.vatom.com):
 
 ```bash
 PORT=8081
