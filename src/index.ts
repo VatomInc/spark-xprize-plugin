@@ -1,5 +1,4 @@
 import Spark from "@vatom/spark-sdk";
-import "./env";
 
 // This descriptor is used to describe the plugin to the vatom client
 const descriptor: any = {
@@ -12,11 +11,6 @@ const descriptor: any = {
         id: "m.room.message",
         actions: ["reply", "react", "flag"],
         name: "Post",
-      },
-      {
-        id: "v.room.topic",
-        actions: ["reply", "react", "flag"],
-        name: "Topic",
       },
       {
         id: "v.room.poll",
@@ -96,11 +90,10 @@ const descriptor: any = {
 };
 
 // This is the client id and secret for the plugin - used to communicate back to the Spark Engine. These are issued per plugin
-const { CLIENT_ID, CLIENT_SECRET } = process.env;
+const clientId = "xprize-plugin";
+const clientSecret = "uDxwfnKpfgecJlVt5I8MV";
 
-console.log("env", CLIENT_ID, CLIENT_SECRET)
-
-const spark = new Spark(descriptor, CLIENT_ID!, CLIENT_SECRET!);
+const spark = new Spark(descriptor, clientId, clientSecret);
 
 spark.start();
 
